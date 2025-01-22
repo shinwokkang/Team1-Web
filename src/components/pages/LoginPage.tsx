@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import Input from "../login/Input";
 import Button from "../login/Button";
+import GotoJoin from "../login/GotoJoin";
 
 const WrapperStyle = styled.div`
   display: flex;
@@ -58,9 +59,7 @@ const LoginPage = () => {
           />
           <Button />
         </WrapperStyle>
-        <div>
-          <p> 회원가입 </p>
-        </div>
+        <GotoJoin />
       </MainContainerStyle>
     </>
   );
