@@ -23,10 +23,11 @@ const UnderlinedLink = styled.u`
 const GotoJoin = () => {
   const navigate = useNavigate();
   const handleGotoJoin = () => {
-    navigate("/join"); // 로그인 후 이동할 경로
+    navigate("/home"); // 로그인 후 이동할 경로
   };
   return (
     <GotoJoinContainer>
+      아직 계정이 없으신가요? &nbsp;
       <UnderlinedLink onClick={handleGotoJoin}>회원가입</UnderlinedLink>
     </GotoJoinContainer>
   );

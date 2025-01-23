@@ -2,14 +2,14 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import InputItem from "./InputItem";
-import { useState } from "react";
 
 interface InputProps {
   id: string;
   setId: React.Dispatch<React.SetStateAction<string>>;
   pw: string;
-  setPw: React.Dispatch<React.SetStateAction<string>>;
-  handlePw?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setPw?: React.Dispatch<React.SetStateAction<string>>;
+  handlePw: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  pwValid: boolean;
 }
 
 const InputStyle = styled.div`
@@ -29,20 +29,7 @@ const ErrorMessageStyle = styled.div`
   font-size: 12px;
 `;
 
-const Input = ({ id, setId, pw, setPw }: InputProps) => {
-  const [pwValid, setPwValid] = useState<boolean>(false);
-
-  const handlePw = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPw(e.target.value);
-    const regex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-    if (regex.test(pw)) {
-      setPwValid(true);
-    } else {
-      setPwValid(false);
-    }
-  };
-
+const Input = ({ id, setId, pw, pwValid, handlePw }: InputProps) => {
   return (
     <InputStyle>
       <InputWrapStyle>

@@ -38,13 +38,53 @@ const MainContainerStyle = styled.div`
     width: auto;
   }
 `;
+
 const LoginPage = () => {
   const [id, setId] = useState<string>("");
   const [pw, setPw] = useState<string>("");
-  //   const handlePw = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     setPw(e.target.value);
-  //   };
+  const [PwValid, setPwValid] = useState<boolean>(false);
+
+  const handlePw = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPw(value);
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    setPwValid(regex.test(value));
+  };
+
+  const handleLogin = async () => {
+    if (!PwValid) {
+      alert(
+        "비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다."
+      );
+      return;
+    }
+
+    const loginData = { id, pw };
+
+    try {
+      const response = await fetch("http://members/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("로그인 성공:", data);
+        window.location.href = "/home";
+      } else {
+        console.error("로그인 실패");
+        alert("로그인에 실패했습니다. 아이디 또는 비밀번호를 확인하세요.");
+      }
+    } catch (error) {
+      console.error("네트워크 에러:", error);
+      alert("서버에 연결할 수 없습니다. 다시 시도해주세요.");
+    }
+  };
+
   console.log("로그인 페이지 렌더링");
+
   return (
     <>
       <MainContainerStyle>
@@ -54,10 +94,10 @@ const LoginPage = () => {
             id={id}
             setId={setId}
             pw={pw}
-            setPw={setPw}
-            //   handlePw={handlePw}
+            handlePw={handlePw}
+            pwValid={PwValid}
           />
-          <Button />
+          <Button handleLogin={handleLogin} />
         </WrapperStyle>
         <GotoJoin />
       </MainContainerStyle>
