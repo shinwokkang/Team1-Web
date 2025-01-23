@@ -7,11 +7,9 @@ const ButtonWrapStyle = styled.div`
   border-radius: 10px;
   height: 50px;
 
-  border: 3px solid skyblue;
-
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 15px;
 `;
 
 const ButtonStyle = styled.button`
@@ -23,10 +21,10 @@ const ButtonStyle = styled.button`
   border: none;
 `;
 
-const Button = () => {
+const Button = ({ handleSignup }: { handleSignup: () => void }) => {
   return (
     <ButtonWrapStyle>
-      <ButtonStyle>회원가입</ButtonStyle>
+      <ButtonStyle onClick={handleSignup}>회원가입</ButtonStyle>
     </ButtonWrapStyle>
   );
 };

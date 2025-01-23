@@ -28,7 +28,7 @@ const GotoLogin = () => {
   return (
     <div>
       <GotoLoginContainer>
-        이미 계정이 있으신가요?
+        이미 계정이 있으신가요? &nbsp; &nbsp;
         <UnderlinedLink onClick={handleGotoLogin}> 로그인</UnderlinedLink>
       </GotoLoginContainer>
     </div>

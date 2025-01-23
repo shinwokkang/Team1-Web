@@ -36,6 +36,38 @@ const JoinPage = () => {
   const [newPw, setNewPw] = useState<string>("");
   const [checkNewPw, setCheckNewPw] = useState<string>("");
   const [newAlias, setNewAlias] = useState<string>("");
+
+  const handleSignup = async () => {
+    if (newPw !== checkNewPw) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    const signupData = {
+      id: newId,
+      password: newPw,
+      alias: newAlias,
+    };
+
+    try {
+      const response = await fetch("http://members/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(signupData),
+      });
+
+      if (response.ok) {
+        alert("회원가입에 성공했습니다!");
+        window.location.href = "/login";
+      } else {
+        const errorData = await response.json();
+        alert(`회원가입 실패: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error("회원가입 요청 중 오류 발생:", error);
+      alert("회원가입 요청 중 문제가 발생했습니다.");
+    }
+  };
+
   return (
     <>
       <JoinContainerStyle>
@@ -51,7 +83,7 @@ const JoinPage = () => {
             checkNewPw={checkNewPw}
             setCheckNewPw={setCheckNewPw}
           />
-          <Button />
+          <Button handleSignup={handleSignup} />
           <GotoLogin />
         </JoinWperStyle>
       </JoinContainerStyle>

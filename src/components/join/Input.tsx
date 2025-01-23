@@ -101,7 +101,9 @@ const Input = ({
         type="password"
       />
       <PwMismatchStyle>
-        {newPw != checkNewPw && <div>비밀번호가 일치하지 않습니다.</div>}
+        {newPw != checkNewPw && checkNewPw.length >= 1 && (
+          <div>비밀번호가 일치하지 않습니다.</div>
+        )}
       </PwMismatchStyle>
     </InputWrapStyle>
   );
