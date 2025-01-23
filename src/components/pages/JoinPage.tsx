@@ -2,6 +2,7 @@ import Input from "../join/Input";
 import Button from "../join/Button";
 import styled from "@emotion/styled";
 import GotoLogin from "../join/GotoLogin";
+import { useState } from "react";
 
 const JoinContainerStyle = styled.div`
   display: flex;
@@ -31,12 +32,25 @@ const JoinWperStyle = styled.div`
 `;
 
 const JoinPage = () => {
+  const [newId, setNewId] = useState<string>("");
+  const [newPw, setNewPw] = useState<string>("");
+  const [checkNewPw, setCheckNewPw] = useState<string>("");
+  const [newAlias, setNewAlias] = useState<string>("");
   return (
     <>
       <JoinContainerStyle>
         <h1>회원가입</h1>
         <JoinWperStyle>
-          <Input />
+          <Input
+            newAlias={newAlias}
+            setNewAlias={setNewAlias}
+            newId={newId}
+            setNewId={setNewId}
+            newPw={newPw}
+            setNewPw={setNewPw}
+            checkNewPw={checkNewPw}
+            setCheckNewPw={setCheckNewPw}
+          />
           <Button />
           <GotoLogin />
         </JoinWperStyle>

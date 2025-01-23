@@ -2,6 +2,9 @@ import styled from "@emotion/styled";
 
 interface InputItemProps {
   content: string;
+  value?: string;
+  type: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputItemStyle = styled.input`
@@ -12,10 +15,15 @@ const InputItemStyle = styled.input`
   border: none;
 `;
 
-const InputItem = ({ content }: InputItemProps) => {
+const InputItem = ({ content, value, onChange, type }: InputItemProps) => {
   return (
     <div>
-      <InputItemStyle placeholder={content} />
+      <InputItemStyle
+        placeholder={content}
+        value={value}
+        onChange={onChange}
+        type={type}
+      />
     </div>
   );
 };
