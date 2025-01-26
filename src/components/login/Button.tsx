@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 const ButtonStyle = styled.button`
   cursor: pointer;
@@ -15,6 +16,12 @@ const ButtonStyle = styled.button`
 `;
 
 const Button = ({ handleLogin }: { handleLogin: () => void }) => {
-  return <ButtonStyle onClick={handleLogin}>로그인</ButtonStyle>;
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    handleLogin();
+    navigate("/home"); // handleLogin 실행 후 네비게이트
+  };
+  return <ButtonStyle onClick={onClick}>로그인</ButtonStyle>;
 };
 export default Button;

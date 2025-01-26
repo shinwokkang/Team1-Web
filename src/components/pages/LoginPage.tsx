@@ -44,6 +44,7 @@ const LoginPage = () => {
   const [id, setId] = useState<string>("");
   const [pw, setPw] = useState<string>("");
   const [PwValid, setPwValid] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handlePw = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -54,7 +55,6 @@ const LoginPage = () => {
   };
 
   const handleLogin = async () => {
-    const navigate = useNavigate();
     if (!PwValid) {
       alert(
         "비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다."
@@ -67,7 +67,7 @@ const LoginPage = () => {
 
     try {
       const response = await fetch(
-        "http://13.125.208.182:8080/v1/members/login",
+        "http://15.164.98.149:8080/v1/members/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
