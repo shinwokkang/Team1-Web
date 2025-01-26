@@ -23,7 +23,7 @@ const UnderlinedLink = styled.u`
 const GotoJoin = () => {
   const navigate = useNavigate();
   const handleGotoJoin = () => {
-    navigate("/home"); // 로그인 후 이동할 경로
+    navigate("/join"); // 로그인 후 이동할 경로
   };
   return (
     <GotoJoinContainer>

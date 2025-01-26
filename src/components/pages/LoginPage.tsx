@@ -5,6 +5,7 @@ import { useState } from "react";
 import Input from "../login/Input";
 import Button from "../login/Button";
 import GotoJoin from "../login/GotoJoin";
+import { useNavigate } from "react-router-dom";
 
 const WrapperStyle = styled.div`
   display: flex;
@@ -53,26 +54,37 @@ const LoginPage = () => {
   };
 
   const handleLogin = async () => {
+    const navigate = useNavigate();
     if (!PwValid) {
       alert(
         "비밀번호는 영문, 숫자, 특수문자를 포함하여 8자 이상이어야 합니다."
       );
       return;
     }
-
-    const loginData = { id, pw };
+    const loginId = id;
+    const password = pw;
+    const loginData = { loginId, password };
 
     try {
-      const response = await fetch("http://members/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(loginData),
-      });
+      const response = await fetch(
+        "http://13.125.208.182:8080/v1/members/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(loginData),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
         console.log("로그인 성공:", data);
-        window.location.href = "/home";
+        if (data.accessToken) {
+          sessionStorage.setItem("accessToken", data.accessToken);
+          console.log(`Token 저장 : ${data.accessToken}`);
+          navigate("/home");
+        } else {
+          console.error("서버로부터 AccessToken을 발급받지 못했습니다.");
+        }
       } else {
         console.error("로그인 실패");
         alert("로그인에 실패했습니다. 아이디 또는 비밀번호를 확인하세요.");

@@ -17,5 +17,4 @@ const ButtonStyle = styled.button`
 const Button = ({ handleLogin }: { handleLogin: () => void }) => {
   return <ButtonStyle onClick={handleLogin}>로그인</ButtonStyle>;
 };
-
 export default Button;

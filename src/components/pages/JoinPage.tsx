@@ -3,6 +3,7 @@ import Button from "../join/Button";
 import styled from "@emotion/styled";
 import GotoLogin from "../join/GotoLogin";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const JoinContainerStyle = styled.div`
   display: flex;
@@ -38,32 +39,37 @@ const JoinPage = () => {
   const [newAlias, setNewAlias] = useState<string>("");
 
   const handleSignup = async () => {
+    const navigate = useNavigate();
     if (newPw !== checkNewPw) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
     const signupData = {
-      id: newId,
+      loginId: newId,
+      username: newAlias,
       password: newPw,
-      alias: newAlias,
     };
 
     try {
-      const response = await fetch("http://members/join", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(signupData),
-      });
-
+      const response = await fetch(
+        "http://13.125.208.182:8080/v1/members/join",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(signupData),
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         alert("회원가입에 성공했습니다!");
-        window.location.href = "/login";
+        navigate("/login");
       } else {
         const errorData = await response.json();
         alert(`회원가입 실패: ${errorData.message}`);
+        console.log(`Error status : ${response.status}`);
       }
     } catch (error) {
-      console.error("회원가입 요청 중 오류 발생:", error);
+      console.log("회원가입 요청 중 오류 발생:", error);
       alert("회원가입 요청 중 문제가 발생했습니다.");
     }
   };
