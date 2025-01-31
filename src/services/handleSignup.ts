@@ -5,7 +5,19 @@ export const handleSignup = async (
   checkNewPw: string,
   navigate: (path: string) => void
 ) => {
-  if (newPw !== checkNewPw) {
+  if (newAlias.length == 0) {
+    alert("별명 입력해주세요.");
+    return;
+  }
+  if (newId.length == 0) {
+    alert("아이디를 입력해주세요.");
+    return;
+  }
+  if (newPw.length == 0) {
+    alert("비밀번호를 입력해주세요.");
+    return;
+  }
+  if (newPw !== checkNewPw && checkNewPw.length == 0) {
     alert("비밀번호가 일치하지 않습니다.");
     return;
   }
@@ -16,7 +28,7 @@ export const handleSignup = async (
   };
 
   try {
-    const response = await fetch("http://15.164.98.149:8080/v1/members/join", {
+    const response = await fetch("http://43.201.23.0:8080/v1/members/join", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(signupData),
