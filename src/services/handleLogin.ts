@@ -1,8 +1,10 @@
-export const handleLogin = async (
-  id: string,
-  pw: string,
-  navigate: (path: string) => void
-) => {
+interface loginProps {
+  id: string;
+  pw: string;
+  navigate: (path: string) => void;
+}
+
+export const handleLogin = async ({ id, pw, navigate }: loginProps) => {
   const regex =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 

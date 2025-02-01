@@ -1,10 +1,18 @@
-export const handleSignup = async (
-  newId: string,
-  newAlias: string,
-  newPw: string,
-  checkNewPw: string,
-  navigate: (path: string) => void
-) => {
+interface signupProps {
+  newId: string;
+  newAlias: string;
+  newPw: string;
+  checkNewPw: string;
+  navigate: (path: string) => void;
+}
+
+export const handleSignup = async ({
+  newId,
+  newAlias,
+  newPw,
+  checkNewPw,
+  navigate,
+}: signupProps) => {
   if (newAlias.length == 0) {
     alert("별명 입력해주세요.");
     return;

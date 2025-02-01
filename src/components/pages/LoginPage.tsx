@@ -67,7 +67,7 @@ const LoginPage = () => {
             handlePw={handlePw}
             pwValid={PwValid}
           />
-          <Button handleLogin={() => handleLogin(id, pw, navigate)} />
+          <Button handleLogin={() => handleLogin({ id, pw, navigate })} />
         </WrapperStyle>
         <GotoJoin />
       </MainContainerStyle>
