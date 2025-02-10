@@ -5,6 +5,7 @@ import GlobalStyle from "./components/style/GlobalStyle.tsx";
 import LoginPage from "./components/pages/LoginPage.tsx";
 import JoinPage from "./components/pages/JoinPage.tsx";
 import MyPage from "./components/pages/MyPage.tsx";
+import ChangePwpage from "./components/pages/ChangepwPage.tsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile" element={<MyPage />} />
+          <Route path="/changePw" element={<ChangePwpage />} />
         </Routes>
       </BrowserRouter>
     </div>

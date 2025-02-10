@@ -28,7 +28,14 @@ export const handleLogin = async ({ id, pw, navigate }: loginProps) => {
 
       if (data.accessToken) {
         sessionStorage.setItem("accessToken", data.accessToken);
-        console.log(`Token 저장 : ${data.accessToken}`);
+        sessionStorage.setItem("refreshToken", data.refreshToken);
+        sessionStorage.setItem("member_id", id);
+        sessionStorage.setItem("password", pw);
+
+        console.log(`accessToken 저장 : ${data.accessToken}`);
+        console.log(`refreshToken 저장 : ${data.refreshToken}`);
+        console.log(`member_id 저장 : ${id}`);
+        console.log(`password 저장 : ${pw}`);
         navigate("/home");
       } else {
         console.error("서버로부터 AccessToken을 발급받지 못했습니다.");
