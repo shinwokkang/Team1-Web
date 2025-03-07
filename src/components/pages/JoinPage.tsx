@@ -6,33 +6,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleSignup } from "../../services/handleSignup";
 
-const JoinContainerStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 25%;
-  height: 60%;
-  justify-content: center;
-  align-items: center;
-
-  /* 페이지 전체 화면에서 중앙 정렬 */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  h1 {
-    font-size: 40px;
-  }
-`;
-
-const JoinWperStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  width: 100%;
-`;
-
 const JoinPage = () => {
   const [newId, setNewId] = useState<string>("");
   const [newPw, setNewPw] = useState<string>("");
@@ -66,5 +39,31 @@ const JoinPage = () => {
     </>
   );
 };
+
+const JoinContainerStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 25%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  h1 {
+    font-size: 40px;
+  }
+`;
+
+const JoinWperStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+`;
 
 export default JoinPage;

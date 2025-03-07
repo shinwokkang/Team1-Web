@@ -8,39 +8,6 @@ import GotoJoin from "../login/GotoJoin";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../../services/handleLogin";
 
-const WrapperStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-`;
-const MainContainerStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 25%;
-  height: 60%;
-  justify-content: center;
-  align-items: center;
-
-  /* 페이지 전체 화면에서 중앙 정렬 */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  h1 {
-    font-size: 40px;
-  }
-
-  p {
-    cursor: pointer;
-    justify-content: center;
-    width: auto;
-  }
-`;
-
 const LoginPage = () => {
   const [id, setId] = useState<string>("");
   const [pw, setPw] = useState<string>("");
@@ -74,5 +41,37 @@ const LoginPage = () => {
     </>
   );
 };
+
+const WrapperStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+const MainContainerStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 25%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  h1 {
+    font-size: 40px;
+  }
+
+  p {
+    cursor: pointer;
+    justify-content: center;
+    width: auto;
+  }
+`;
 
 export default LoginPage;
