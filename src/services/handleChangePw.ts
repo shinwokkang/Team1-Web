@@ -1,12 +1,12 @@
-import axios from "axios";
+import instance from "../components/api/axios";
 
 export const handleChangePw = async (
-  memberId: string, // 🔹 memberId 추가
+  memberId: string,
   currentPassword: string,
   newPassword: string
 ): Promise<boolean> => {
   try {
-    const response = await axios.post(`/members/password/${memberId}`, {
+    const response = await instance.post(`/members/password/${memberId}`, {
       currentPassword,
       newPassword,
     });

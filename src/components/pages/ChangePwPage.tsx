@@ -1,25 +1,29 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { handleChangePw } from "../../services/handleChangePw";
-import { checkCurrentPw } from "../../services/CheckCurrentPw";
 import { IoChevronForward } from "react-icons/io5";
 
 const ChangePwPage = ({ memberId }: { memberId: string }) => {
-  const [currentPw, setCurrentPw] = useState(""); // 🔹 현재 비밀번호 추가
+  const [currentPw, setCurrentPw] = useState("");
   const [newPw, setNewPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
-  const [pwError, setPwError] = useState(""); // 🔹 상태 추가
+  const [pwError, setPwError] = useState("");
   const [confirmError, setConfirmError] = useState("");
   const [isCurrentPwChecked, setIsCurrentPwChecked] = useState(false);
   const [checkMessage, setCheckMessage] = useState<string | null>(null);
 
   const handleCheckCurrentPw = () => {
-    if (checkCurrentPw(currentPw)) {
-      setIsCurrentPwChecked(true);
-      setCheckMessage("확인되었습니다.");
-    } else {
+    const savedPw = sessionStorage.getItem("password");
+
+    if (savedPw !== currentPw) {
+      console.log("비밀번호 일치하지 않음.");
       setCheckMessage("현재 비밀번호와 일치하지 않습니다.");
+      return;
     }
+
+    alert("확인되었습니다!");
+    setIsCurrentPwChecked(true);
+    setCheckMessage("확인되었습니다.");
   };
 
   const handleSubmit = async () => {
@@ -52,6 +56,7 @@ const ChangePwPage = ({ memberId }: { memberId: string }) => {
       setCheckMessage(null);
     }
   };
+
   return (
     <PageWrapper>
       <Container>
@@ -251,13 +256,12 @@ const ErrorMessage = styled.span<{ isSuccess?: boolean }>`
   margin-top: 4px;
   align-self: flex-end;
   width: 100%;
-  color: ${(props) =>
-    props.isSuccess ? "blue" : "red"}; // ✅ 파란색 또는 빨간색 적용
+  color: ${(props) => (props.isSuccess ? "blue" : "red")};
 `;
 
 const CurrentPwContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start; // 왼쪽 정렬
-  gap: 5px; // 입력 필드와 메시지 간격 조절
+  align-items: flex-start;
+  gap: 5px;
 `;
